@@ -10,6 +10,7 @@ This guide covers deploying the collaborative-canvas application in production e
 2. [Local Production Deployment](#local-production-deployment)
 3. [Cloud Deployments](#cloud-deployments)
    - [Heroku](#heroku)
+  - [Render](#render)
    - [Railway](#railway)
    - [AWS EC2](#aws-ec2)
    - [DigitalOcean](#digitalocean)
@@ -124,6 +125,36 @@ heroku logs --tail
 ```
 
 **Live URL:** `https://your-app-name.herokuapp.com`
+
+---
+
+### Render
+
+**Requirements:** Render account, GitHub repo, MongoDB Atlas (recommended)
+
+#### Step 1: Add a Render Blueprint
+
+This repo includes a Render blueprint to configure the service automatically.
+
+#### Step 2: Create the Service
+
+1. Go to [render.com](https://render.com)
+2. Click **New +** → **Blueprint**
+3. Connect your GitHub repo and select **collaborative-canvas**
+4. Render will detect **render.yaml** and create a **Web Service**
+
+#### Step 3: Configure Environment Variables
+
+In the Render dashboard, set:
+
+- `MONGO_URL` = your MongoDB Atlas connection string
+- `NODE_ENV` = `production`
+
+#### Step 4: Deploy
+
+Render will build and deploy on every push to `main`.
+
+**Live URL:** Provided by Render (e.g., `https://your-app.onrender.com`)
 
 ---
 
