@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Collaborative Canvas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="toolbar">
+      <div id="tools">
+        <button id="brush-tool" class="tool active" title="Brush">✏️ Brush</button>
+        <button id="eraser-tool" class="tool" title="Eraser">🗑️ Eraser</button>
+      </div>
+      <input type="color" id="color" value="#000000" />
+      <div id="color-palette">
+        <button class="color-swatch" style="background:#000000" data-color="#000000"></button>
+        <button class="color-swatch" style="background:#FF6B6B" data-color="#FF6B6B"></button>
+        <button class="color-swatch" style="background:#4ECDC4" data-color="#4ECDC4"></button>
+        <button class="color-swatch" style="background:#45B7D1" data-color="#45B7D1"></button>
+        <button class="color-swatch" style="background:#FFA07A" data-color="#FFA07A"></button>
+        <button class="color-swatch" style="background:#F7DC6F" data-color="#F7DC6F"></button>
+      </div>
+      <input type="range" id="width" min="1" max="40" value="4" />
+      <button id="undo">↶ Undo</button>
+      <button id="redo">↷ Redo</button>
+      <button id="clear-btn" title="Clear canvas">🗑️ Clear</button>
+      <button id="save-btn" title="Save drawing">💾 Save</button>
+      <span id="status">Not connected</span>
+    </div>
+
+    <div id="sidebar">
+      <div id="users-panel">
+        <h4>Online</h4>
+        <div id="users-list"></div>
+      </div>
+
+      <div id="chat-panel">
+        <h4>Chat</h4>
+        <div id="chat-messages"></div>
+        <div id="chat-input-wrapper">
+          <input type="text" id="chat-input" placeholder="Type message..." />
+          <button id="chat-send">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+    <canvas id="cursor-layer"></canvas>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="websocket.js"></script>
+    <script src="canvas.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

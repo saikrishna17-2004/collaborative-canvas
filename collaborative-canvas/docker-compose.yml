@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URL: ${MONGO_URL:-mongodb://mongo:27017/collaborative-canvas}
+      NODE_ENV: production
+      PORT: 3000
+    depends_on:
+      - mongo
+    restart: always
+    networks:
+      - canvas-network
+
+  mongo:
+    image: mongo:6-alpine
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: collaborative-canvas
+    restart: always
+    networks:
+      - canvas-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo-data:
+
+networks:
+  canvas-network:
+    driver: bridge
